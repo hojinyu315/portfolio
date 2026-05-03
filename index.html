@@ -71,6 +71,7 @@
   }
 
   nav ul a:hover { color: var(--white); }
+  nav ul a.active { color: var(--white); border-bottom: 1px solid var(--white); padding-bottom: 2px; }
 
   /* LEFT SIDEBAR */
   .left-sidebar {
@@ -1577,6 +1578,19 @@ document.addEventListener('keydown', function(e) {
     });
   }
 });
+
+const navLinks = document.querySelectorAll('nav ul a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`nav ul a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => navObserver.observe(s));
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
