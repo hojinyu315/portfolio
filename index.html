@@ -102,6 +102,11 @@
   .left-sidebar a:hover { opacity: 1; }
   .left-sidebar svg { width: 18px; height: 18px; fill: none; stroke: var(--black); stroke-width: 1.5; }
 
+  .sidebar-item-light { color: #fff !important; }
+  .sidebar-item-light svg { stroke: #fff !important; }
+  .sidebar-item-light svg polygon { fill: #fff !important; }
+  .sidebar-item-light svg circle[fill] { fill: #fff !important; }
+
   .sidebar-label {
     font-family: 'Montserrat', sans-serif;
     font-size: 9px;
@@ -372,7 +377,20 @@
   }
 
   /* CAREER */
-  #career { background: var(--white); border-bottom: 1px solid var(--border); }
+  #career { background: var(--black); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  #career .section-label { color: rgba(255,255,255,0.4); }
+  #career .section-title { color: var(--white); border-bottom-color: rgba(255,255,255,0.1); }
+  #career .career-item { border-left-color: rgba(255,255,255,0.15); }
+  #career .career-item::before { background: var(--black); border-color: rgba(255,255,255,0.5); box-shadow: none; }
+  #career .career-period { color: rgba(255,255,255,0.4); }
+  #career .career-company { color: var(--white); }
+  #career .career-role { color: rgba(255,255,255,0.85); }
+  #career .career-bullets li { color: rgba(255,255,255,0.65); }
+  #career .career-bullets li strong { color: var(--white); }
+  #career .tag { color: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.18); }
+  #career .section-marker-num { color: rgba(255,255,255,0.4); }
+  #career .section-marker-line { background: rgba(255,255,255,0.18); }
+  #career .section-marker-label { color: rgba(255,255,255,0.4); }
 
   .career-item {
     padding: 32px 0 32px 28px;
@@ -1594,6 +1612,20 @@ const navObserver = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-40% 0px -55% 0px' });
 sections.forEach(s => navObserver.observe(s));
+
+const sidebarItems = document.querySelectorAll('.left-sidebar a, .left-sidebar .sidebar-label');
+function updateSidebarColors() {
+  const careerEl = document.getElementById('career');
+  if (!careerEl) return;
+  const dr = careerEl.getBoundingClientRect();
+  sidebarItems.forEach(item => {
+    const r = item.getBoundingClientRect();
+    const mid = r.top + r.height / 2;
+    item.classList.toggle('sidebar-item-light', mid >= dr.top && mid <= dr.bottom);
+  });
+}
+window.addEventListener('scroll', updateSidebarColors, { passive: true });
+updateSidebarColors();
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
