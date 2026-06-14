@@ -224,21 +224,31 @@
 
   /* METRICS */
   .metrics {
+    background: var(--light-gray);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metrics-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 52px 60px;
-    border-bottom: 1px solid var(--border);
+    padding: 48px 60px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 
   .metric-item {
-    padding-right: 40px;
-    border-right: 1px solid var(--border);
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s, transform 0.2s;
   }
 
-  .metric-item:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
-  .metric-item:nth-child(2) { padding: 0 40px; }
+  .metric-item:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
 
   .metric-num {
     font-family: 'Montserrat', sans-serif;
@@ -902,17 +912,19 @@
 
 <!-- 핵심 수치 -->
 <div class="metrics">
-  <div class="metric-item">
-    <div class="metric-num">1,000만+</div>
-    <div class="metric-label">오리지널 쇼츠 월 최고 조회수</div>
-  </div>
-  <div class="metric-item">
-    <div class="metric-num">435만</div>
-    <div class="metric-label">단일 콘텐츠 최고 조회수 · 좋아요 15만</div>
-  </div>
-  <div class="metric-item">
-    <div class="metric-num">+28.6%</div>
-    <div class="metric-label">극장판 2기 관객 수 증가 (+57,661명)</div>
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <div class="metric-num">1,000만+</div>
+      <div class="metric-label">오리지널 쇼츠 월 최고 조회수</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-num">435만</div>
+      <div class="metric-label">단일 콘텐츠 최고 조회수 · 좋아요 15만</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-num">51만+</div>
+      <div class="metric-label">CTR 5.7%→6% 개선 · 노출 1.7억 기준 추가 클릭</div>
+    </div>
   </div>
 </div>
 
