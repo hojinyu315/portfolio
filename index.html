@@ -1892,9 +1892,11 @@ function animateMetrics() {
     requestAnimationFrame(draw);
   });
 }
+/* 화면 하단에 살짝 걸친 상태(첫 화면)에서는 발동하지 않고,
+   섹션 상단이 뷰포트 위쪽 60% 영역에 들어왔을 때 카운트업 시작 */
 const metricsObserver = new IntersectionObserver(entries => {
   if (entries.some(entry => entry.isIntersecting)) animateMetrics();
-}, { threshold: 0.35 });
+}, { threshold: 0, rootMargin: '0px 0px -40% 0px' });
 const metricsSection = document.querySelector('#metrics');
 if (metricsSection) metricsObserver.observe(metricsSection);
 
