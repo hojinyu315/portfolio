@@ -1872,9 +1872,17 @@ document.querySelectorAll('.project-card').forEach(card => {
 const metricTargets = ['+28.6%', '435만', 'CTR 5.7 → 6.0%'];
 const metricItems = document.querySelectorAll('.metric-item');
 let metricsAnimated = false;
+let metricRafIds = [];
+
+function cancelMetricRafs() {
+  metricRafIds.forEach(id => cancelAnimationFrame(id));
+  metricRafIds = [];
+}
+
 function animateMetrics() {
   if (metricsAnimated) return;
   metricsAnimated = true;
+  cancelMetricRafs();
   metricItems.forEach((item, index) => {
     const el = item.querySelector('.metric-num');
     if (!el) return;
@@ -1887,16 +1895,25 @@ function animateMetrics() {
       if (index === 0) el.textContent = `+${(28.6 * eased).toFixed(1)}%`;
       if (index === 1) el.textContent = `${Math.round(435 * eased)}만`;
       if (index === 2) el.textContent = `CTR ${(5.7 * eased).toFixed(1)} → ${(6.0 * eased).toFixed(1)}%`;
-      if (t < 1) requestAnimationFrame(draw); else el.textContent = target;
+      if (t < 1) metricRafIds.push(requestAnimationFrame(draw)); else el.textContent = target;
     };
-    requestAnimationFrame(draw);
+    metricRafIds.push(requestAnimationFrame(draw));
   });
 }
-/* 화면 하단에 살짝 걸친 상태(첫 화면)에서는 발동하지 않고,
-   섹션 상단이 뷰포트 위쪽 60% 영역에 들어왔을 때 카운트업 시작 */
+
+/* 섹션이 화면 밖으로 완전히 나가면 초기화 → 다시 들어올 때 카운트업 재실행 */
+function resetMetrics() {
+  metricsAnimated = false;
+  cancelMetricRafs();
+}
+
+/* 40% 이상 보이면 즉시 발동(첫 화면에 걸쳐 있어도 실행), 완전히 사라지면 리셋 */
 const metricsObserver = new IntersectionObserver(entries => {
-  if (entries.some(entry => entry.isIntersecting)) animateMetrics();
-}, { threshold: 0, rootMargin: '0px 0px -40% 0px' });
+  entries.forEach(entry => {
+    if (entry.intersectionRatio >= 0.4) animateMetrics();
+    else if (!entry.isIntersecting) resetMetrics();
+  });
+}, { threshold: [0, 0.4] });
 const metricsSection = document.querySelector('#metrics');
 if (metricsSection) metricsObserver.observe(metricsSection);
 
