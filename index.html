@@ -785,7 +785,7 @@
     .metric-item { position: relative; overflow: hidden; }
     .metric-item::after { content: ''; position: absolute; top: 0; left: -100%; width: 70%; height: 1px; background: rgba(255,255,255,0.7); transition: left 0.7s ease; }
     .metric-item:hover::after { left: 100%; }
-    .metric-num { transition: letter-spacing 0.25s ease, transform 0.25s ease; }
+    .metric-num { white-space: nowrap; transition: letter-spacing 0.25s ease, transform 0.25s ease; }
     .metric-item:hover .metric-num { letter-spacing: 1.5px; transform: translateX(3px); }
     .philosophy-card, .activity-card, .timeline-item, .project-card { will-change: transform; }
     .philosophy-card { position: relative; overflow: hidden; }
