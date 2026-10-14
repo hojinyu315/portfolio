@@ -23,14 +23,14 @@
       --gray-light: #f6f6f6;
       --border: #e0e0e0;
       --white: #fff;
-      --accent: #111111;
-      --accent-dark: #000000;
-      --accent-soft: #EFEFEF;
-      --pink: #666666;
-      --grad: linear-gradient(135deg, #111111 0%, #666666 100%);
-      --dark-bg: #111111;
-      --nav-bg: #111111;
-      --card-bg: #1C1C1C;
+      --accent: #0F7BFF;
+      --accent-dark: #0A5FD1;
+      --accent-soft: #E9F2FF;
+      --pink: #5AA9FF;
+      --grad: linear-gradient(135deg, #0F7BFF 0%, #5AA9FF 100%);
+      --dark-bg: #2B2F36;
+      --nav-bg: #2B2F36;
+      --card-bg: #343841;
       --on-dark: rgba(255,255,255,0.72);
       --on-dark-dim: rgba(255,255,255,0.45);
       --on-dark-line: rgba(255,255,255,0.12);
@@ -38,17 +38,17 @@
       --radius-md: 16px;
 
       /* 스크롤 진행에 따라 JS가 갱신: 퍼플 → 핑크 → 흰색 (벙커키즈 히어로 그라데이션) */
-      --scroll-bg: #111111;
-      --dyn-fg: #FFFFFF;
-      --dyn-fg-dim: rgba(255,255,255,0.72);
-      --dyn-line: rgba(255,255,255,0.12);
+      --scroll-bg: #FFFFFF;
+      --dyn-fg: #111111;
+      --dyn-fg-dim: rgba(17,17,17,0.62);
+      --dyn-line: rgba(17,17,17,0.14);
     }
 
     /* 스크롤 배경 레이어 (hero~metrics 구간) */
     #scroll-bg {
       position: fixed;
       inset: 0;
-      background: linear-gradient(112deg, #3A3A3A 0 15%, #0D0D0D 15% 47%, #202020 47% 100%);
+      background: linear-gradient(112deg, #FFFFFF 0 15%, #F4F8FF 15% 47%, #EAF2FF 47% 100%);
       background-size: 240% 240%;
       background-position: 12% 50%;
       animation: cj-shift 5.5s cubic-bezier(.45,.05,.55,.95) infinite alternate;
@@ -240,7 +240,8 @@
       display: flex;
       align-items: center;
       gap: 26px;
-      background: var(--card-bg);
+      background: #F3F6FB;
+      border: 1px solid #E3E9F2;
       border-radius: 24px;
       padding: 16px 34px 16px 16px;
     }
@@ -260,7 +261,7 @@
       font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
       font-size: 36px;
       font-weight: 700;
-      color: var(--white);
+      color: #111111;
       letter-spacing: -0.02em;
       line-height: 1.2;
     }
@@ -270,7 +271,7 @@
       font-size: 11.5px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(17,17,17,0.52);
       margin-top: 10px;
       line-height: 1.8;
     }
@@ -322,6 +323,30 @@
       top: 6px;
     }
 
+    .hero-title .hl {
+      position: relative;
+      display: inline-block;
+      padding: 0 5px;
+      margin: 0 -3px;
+      color: #0A3D80;
+      z-index: 0;
+    }
+    .hero-title .hl::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 2px;
+      height: 44%;
+      background: #BBDAFF;
+      border-radius: 3px;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: hl-sweep 0.7s cubic-bezier(.22,1,.36,1) 0.9s forwards;
+    }
+    @keyframes hl-sweep { to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-title .hl::before { animation: none; transform: scaleX(1); }
+    }
     .hero-title {
       font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
       font-size: clamp(18px, 2.4vw, 34px);
@@ -1110,14 +1135,14 @@
 
     /* ── About 이후: 밝은 무드 (흰 배경 + 하늘색 포인트) ── */
     .sec-dark {
-      background: #F7F5FF;
+      background: #F4F8FF;
       border-bottom: 1px solid var(--border);
       --white: #111111;
       --on-dark: #555555;
       --on-dark-dim: #8A8F96;
-      --on-dark-line: #E4E0F2;
+      --on-dark-line: #DCE7F7;
       --card-bg: #FFFFFF;
-      --dark-bg: #F7F5FF;
+      --dark-bg: #F4F8FF;
     }
     .sec-dark .section-label { color: var(--on-dark-dim); }
     .sec-dark .section-title { color: var(--white); border-bottom-color: var(--accent); }
@@ -1383,12 +1408,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <span class="hero-wordmark">HOJIN YOO</span>
         <span class="hero-pill">Character IP Content · Short-form &amp; Campaign</span>
       </div>
-      <h1 class="hero-title">캐릭터 IP 콘텐츠를 기획하고 만들어<br>조회수와 관객 수로 증명합니다</h1>
+      <h1 class="hero-title">캐릭터 IP 콘텐츠를 기획하고 만들어<br>누적 <span class="hl">1억 뷰</span>를 쌓았습니다</h1>
       <div class="hero-divider"></div>
       <ul class="hero-checks">
+        <li>유튜브·인스타그램 두 채널에서 담당한 숏폼 <strong>100편 이상</strong> — 주 4편을 8개월간 유지</li>
         <li>밈·트렌드를 원작 IP 문법으로 재조립한 숏폼 — 릴스 <strong>435만 조회</strong>, 좋아요 15만</li>
-        <li>극장판 3기 예고편을 스토리 기반 3단 구성으로 기획·편집 — 평균 조회수 <strong>6.3만 → 12만</strong>, 관객 전작 대비 <strong>+8.8%</strong></li>
         <li>썸네일 A/B 테스트로 검증하며 개선 — CTR <strong>5.7% → 6.0%</strong>, 구독자 <strong>+12%</strong></li>
+        <li>극장판 3기 예고편을 스토리 기반 3단 구성으로 기획·편집 — 평균 조회수 <strong>6.3만 → 12만</strong>, 관객 전작 대비 <strong>+8.8%</strong></li>
       </ul>
     </div>
   </div>
@@ -1398,12 +1424,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <div class="metrics" id="metrics">
   <div class="metrics-inner">
     <div class="metric-item">
-      <div class="metric-num">435만</div>
-      <div class="metric-label">밈 재조립 릴스 조회수<br>좋아요 15만</div>
+      <div class="metric-num">1억+</div>
+      <div class="metric-label">담당 숏폼 누적 조회수<br>유튜브·인스타그램 100편 이상</div>
     </div>
     <div class="metric-item">
-      <div class="metric-num">+8.8%</div>
-      <div class="metric-label">극장판 3기 관객 282,263명, 전작 대비 +22,875명<br>예고편 평균 조회수 6.3만 → 12만</div>
+      <div class="metric-num">435만</div>
+      <div class="metric-label">밈 재조립 릴스 조회수<br>좋아요 15만</div>
     </div>
     <div class="metric-item">
       <div class="metric-num">CTR 5.7 → 6.0%</div>
@@ -1429,7 +1455,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       </div>
       <div class="philosophy-card">
         <p class="philosophy-quote">통한 구조는 개인 노하우로 두지 않고<br>반복 가능한 포맷으로 남긴다</p>
-        <p class="philosophy-body">성공한 기획을 역할별 템플릿으로 분해해 누가 작업해도 같은 품질이 나오게 만듭니다. 새 포맷이 필요할 땐 생성 AI를 무기로 원작 정체성을 지킨 신규 장면을 만들어, 트렌드 밈 릴스 274.2만 조회수로 이어졌습니다.</p>
+        <p class="philosophy-body">성공한 기획을 역할별 템플릿으로 분해해 작업자마다 결과가 달라지는 문제를 줄입니다. 새 포맷이 필요할 땐 생성 AI를 무기로 원작 정체성을 지킨 신규 장면을 만들어, 트렌드 밈 릴스 274.2만 조회수로 이어졌습니다.</p>
       </div>
     </div>
   </div>
@@ -1759,8 +1785,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <ul class="modal-list">
       <li><strong>왜 생성 AI였나:</strong> 3D로 새 장면을 만들면 모델링만 3주, 발행까지 한 달. 트렌드는 1~2주면 지나감 → 바로 결과물이 나오는 생성 AI</li>
       <li><strong>캐릭터 일관성 확보:</strong> 나노바나나를 메인으로, 같은 레퍼런스를 Gemini에도 넣어 원본에 가까운 쪽을 선택. 외부 IP 패러디는 <strong>패러디 컨셉 레퍼런스를 먼저 만들어 모든 생성에 함께 입력</strong> → 우리 캐릭터와 패러디 대상이 동시에 읽히게. 완성 이미지는 Kling으로 영상화</li>
-      <li><strong>영상 툴 선택:</strong> Kling·Higgsfield·Veo를 한 달씩 써보고 비교 — 완성 이미지를 모션으로 살리는 image-to-video와 시작·끝 프레임 제어가 핵심이라 Kling</li>
-      <li><strong>템플릿화 → 팀 자산:</strong> 레퍼런스를 역할별(캐릭터·배경·표정·헤어·라이팅)로 나누고 충돌 시 우선순위 명시 → 후보정 없이 <strong>누가 작업해도 같은 품질</strong></li>
+      <li><strong>영상 툴 선택:</strong> Higgsfield 안에서 나노바나나로 이미지를, Kling으로 영상을 생성 — 완성 이미지를 그대로 살려 움직이게 하려면 image-to-video와 시작·끝 프레임 제어가 필요해 Kling으로 정착</li>
+      <li><strong>템플릿화 → 팀 자산:</strong> 레퍼런스를 역할별(캐릭터·배경·표정·헤어·라이팅)로 나누고 충돌 시 우선순위 명시 → 팀이 같은 기준으로 제작하고 간단한 후보정으로 마무리할 수 있도록 정리</li>
       <li><strong>소재 선정 기준:</strong> 음악·밈·주차별 이슈로 후보를 올리고, 8명 주간 회의에서 화제성과 <strong>제작 가능성</strong>을 함께 판단</li>
     </ul>
     <div class="modal-section-title">Performance</div>
@@ -2221,7 +2247,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     /* 기준 = 사이드바 세 번째(노션) 아이콘 아래쪽이 흰 구간 상단선에 닿는 순간 */
     var boundary = target.getBoundingClientRect().top;
     var iconBottom = ytIcon ? ytIcon.getBoundingClientRect().bottom : window.innerHeight * 0.5;
-    root.classList.toggle('fg-dark', boundary <= iconBottom);
+    root.classList.add('fg-dark');   // 배경이 항상 흰색이므로 어두운 글자 고정
   }
 
   function onScroll() {
@@ -2396,7 +2422,7 @@ if (ctaSection) {
 }
 
 /* ── 지표 카운트업 (보이면 실행, 완전히 사라지면 리셋) ── */
-const metricTargets = ['435만', '+8.8%', 'CTR 5.7 → 6.0%'];
+const metricTargets = ['1억+', '435만', 'CTR 5.7 → 6.0%'];
 const metricItems = document.querySelectorAll('.metric-item');
 let metricsAnimated = false;
 let metricRafIds = [];
@@ -2419,8 +2445,11 @@ function animateMetrics() {
     const draw = now => {
       const t = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - t, 3);
-      if (index === 0) el.textContent = `${Math.round(435 * eased)}만`;
-      if (index === 1) el.textContent = `+${(8.8 * eased).toFixed(1)}%`;
+      if (index === 0) {
+        const v = Math.round(10000 * eased);
+        el.textContent = v >= 10000 ? '1억+' : `${v.toLocaleString()}만`;
+      }
+      if (index === 1) el.textContent = `${Math.round(435 * eased)}만`;
       if (index === 2) el.textContent = `CTR ${(5.7 * eased).toFixed(1)} → ${(6.0 * eased).toFixed(1)}%`;
       if (t < 1) metricRafIds.push(requestAnimationFrame(draw)); else el.textContent = target;
     };
